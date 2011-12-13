@@ -112,14 +112,14 @@ class Ini
 
 end
 
-require_plugin "home_users"
-home_users = get_attribute('home_users')
+require_plugin "users"
+users = get_attribute('users')
 
-home_users.each do |user_array| 
-  user = user_array[0]
+users.each do |user|
+  username = user['username']
 
-  dconf_raw = %x[sudo -iu #{user} dconf dump /]
+  dconf_raw = %x[sudo -iu #{username} dconf dump /]
   dconf = Ini.new(nil, nil, raw=dconf_raw).get_inihash()
 
-  home_users[user]['dconf'] = dconf
+  users[username]['dconf'] = dconf
 end
