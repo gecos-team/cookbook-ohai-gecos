@@ -4,7 +4,9 @@ require 'etc'
 
 users Array.new
 
-Dir["/home/*"].each do |homedir|
+# LikeWise create the user homes at /home/local/DOMAIN/
+homedirs = Dir["/home/*"] + Dir["/home/local/*/*"]
+homedirs.each do |homedir|
   Etc.passwd do |entry|
     next unless homedir == entry.dir
     users << Mash.new(
