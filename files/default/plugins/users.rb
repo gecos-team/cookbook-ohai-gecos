@@ -11,6 +11,7 @@ homedirs.each do |homedir|
     next unless homedir == entry.dir
     users << Mash.new(
       :username => entry.name,
+      :home     => entry.dir,
       :gid      => entry.gid,
       :uid      => entry.uid
     )
